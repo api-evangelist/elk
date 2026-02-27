@@ -1,0 +1,53 @@
+name: Elk API
+description: APIs for the Elk Mastodon client
+image: https://elk.zone/logo.svg
+url: https://elk.zone
+created: '2024-01-01'
+modified: '2024-01-01'
+apis:
+- name: Elk Client API
+  description: Client-side API for Elk, a nimble Mastodon web client
+  image: https://elk.zone/logo.svg
+  humanURL: https://elk.zone
+  baseURL: https://api.elk.zone
+  tags:
+  - mastodon
+  - social
+  - fediverse
+  - client
+  properties:
+  - type: Documentation
+    url: https://docs.elk.zone
+  - type: OpenAPI
+    url: https://api.elk.zone/openapi.json
+  - type: Authentication
+    url: https://docs.elk.zone/authentication
+  contact:
+  - type: Support
+    url: https://github.com/elk-zone/elk/issues
+  - type: GitHub
+    url: https://github.com/elk-zone/elk
+- name: Mastodon API (via Elk)
+  description: Standard Mastodon API endpoints accessible through Elk
+  humanURL: https://docs.joinmastodon.org/api/
+  baseURL: https://[instance]/api/v1
+  tags:
+  - mastodon
+  - activitypub
+  - social-media
+  properties:
+  - type: Documentation
+    url: https://docs.joinmastodon.org/
+  - type: OpenAPI
+    url: https://docs.joinmastodon.org/spec/openapi.json
+maintainers:
+- name: Elk Team
+  email: team@elk.zone
+  url: https://github.com/elk-zone
+tags:
+- mastodon
+- fediverse
+- social-networking
+- open-source
+- progressive-web-app
+include: []
