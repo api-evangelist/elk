@@ -1,53 +1,46 @@
-name: Elk API
-description: APIs for the Elk Mastodon client
-image: https://elk.zone/logo.svg
+aid: elk
+name: Elk
+description: >-
+  Elk is a nimble Mastodon web client that provides a modern interface for
+  interacting with the Mastodon and Fediverse social network. It supports
+  standard Mastodon API endpoints for social networking, timelines, notifications,
+  and account management.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Mastodon
+  - Fediverse
+  - Social Networking
+  - Open Source
 url: https://elk.zone
 created: '2024-01-01'
-modified: '2024-01-01'
+modified: '2026-03-16'
+position: Consumer
+access: 3rd-Party
+specificationVersion: '0.19'
 apis:
-- name: Elk Client API
-  description: Client-side API for Elk, a nimble Mastodon web client
-  image: https://elk.zone/logo.svg
-  humanURL: https://elk.zone
-  baseURL: https://api.elk.zone
-  tags:
-  - mastodon
-  - social
-  - fediverse
-  - client
-  properties:
-  - type: Documentation
-    url: https://docs.elk.zone
-  - type: OpenAPI
-    url: https://api.elk.zone/openapi.json
-  - type: Authentication
-    url: https://docs.elk.zone/authentication
-  contact:
+  - aid: elk:elk-client-api
+    name: Elk Client API
+    description: >-
+      Client-side API for Elk, a nimble Mastodon web client providing access
+      to Fediverse social networking functionality.
+    humanURL: https://elk.zone
+    tags:
+      - Mastodon
+      - Social
+      - Fediverse
+    properties:
+      - type: Documentation
+        url: https://elk.zone
+      - type: OpenAPI
+        url: https://api.elk.zone/openapi.json
+common:
+  - type: Website
+    url: https://elk.zone
+  - type: GitHubOrganization
+    url: https://github.com/elk-zone
   - type: Support
     url: https://github.com/elk-zone/elk/issues
-  - type: GitHub
-    url: https://github.com/elk-zone/elk
-- name: Mastodon API (via Elk)
-  description: Standard Mastodon API endpoints accessible through Elk
-  humanURL: https://docs.joinmastodon.org/api/
-  baseURL: https://[instance]/api/v1
-  tags:
-  - mastodon
-  - activitypub
-  - social-media
-  properties:
-  - type: Documentation
-    url: https://docs.joinmastodon.org/
-  - type: OpenAPI
-    url: https://docs.joinmastodon.org/spec/openapi.json
 maintainers:
-- name: Elk Team
-  email: team@elk.zone
-  url: https://github.com/elk-zone
-tags:
-- mastodon
-- fediverse
-- social-networking
-- open-source
-- progressive-web-app
-include: []
+  - FN: Kin Lane
+    email: kin@apievangelist.com
