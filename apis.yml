@@ -8,10 +8,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Mastodon
   - Fediverse
-  - Social Networking
+  - Mastodon
   - Open Source
+  - Social Networking
 url: https://elk.zone
 created: '2024-01-01'
 modified: '2026-03-16'
@@ -26,9 +26,9 @@ apis:
       to Fediverse social networking functionality.
     humanURL: https://elk.zone
     tags:
+      - Fediverse
       - Mastodon
       - Social
-      - Fediverse
     properties:
       - type: Documentation
         url: https://elk.zone
