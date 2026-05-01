@@ -1,52 +1,40 @@
-# Elk API (elk)
-APIs for the Elk Mastodon client
+# Elk (elk)
+Elk is a nimble Mastodon web client that provides a modern interface for interacting with the Mastodon and Fediverse social network. It supports standard Mastodon API endpoints for social networking, timelines, notifications, and account management.
 
-**URL:** [Visit APIs.json URL](https://elk.zone)
+**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/elk/refs/heads/main/apis.yml)
+
+## Scope
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
 ## Tags:
-
- - mastodon, fediverse, social-networking, open-source, progressive-web-app
+ - Fediverse, Mastodon, Open Source, Social Networking
 
 ## Timestamps
-
-- **Created:** 2024-01-01 
-- **Modified:** 2024-01-01 
+- **Created:** 2024-01-01
+- **Modified:** 2026-03-16
 
 ## APIs
 
 ### Elk Client API
-Client-side API for Elk, a nimble Mastodon web client
+Client-side API for Elk, a nimble Mastodon web client providing access to Fediverse social networking functionality.
 
 **Human URL:** [https://elk.zone](https://elk.zone)
 
-
 #### Tags:
-
- - mastodon, social, fediverse, client
+ - Fediverse, Mastodon, Social
 
 #### Properties
-
 - [Documentation](https://docs.elk.zone)
-- [OpenAPI](https://api.elk.zone/openapi.json)
-- [Authentication](https://docs.elk.zone/authentication)
+- [Source Code](https://github.com/elk-zone/elk)
+- [Specification](https://docs.joinmastodon.org/api/)
 
-### Mastodon API (via Elk)
-Standard Mastodon API endpoints accessible through Elk
-
-**Human URL:** [https://docs.joinmastodon.org/api/](https://docs.joinmastodon.org/api/)
-
-
-#### Tags:
-
- - mastodon, activitypub, social-media
-
-#### Properties
-
-- [Documentation](https://docs.joinmastodon.org/)
-- [OpenAPI](https://docs.joinmastodon.org/spec/openapi.json)
+## Common Properties
+- [Website](https://elk.zone)
+- [GitHub Organization](https://github.com/elk-zone)
+- [Support](https://github.com/elk-zone/elk/issues)
 
 ## Maintainers
-
-**FN:** Elk Team
-
-**Email:** team@elk.zone
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com

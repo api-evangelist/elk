@@ -31,9 +31,11 @@ apis:
       - Social
     properties:
       - type: Documentation
-        url: https://elk.zone
-      - type: OpenAPI
-        url: https://api.elk.zone/openapi.json
+        url: https://docs.elk.zone
+      - type: SourceCode
+        url: https://github.com/elk-zone/elk
+      - type: Specification
+        url: https://docs.joinmastodon.org/api/
 common:
   - type: Website
     url: https://elk.zone
