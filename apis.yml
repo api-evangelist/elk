@@ -37,6 +37,10 @@ apis:
       - type: Specification
         url: https://docs.joinmastodon.org/api/
 common:
+  - type: VulnerabilityDisclosure
+    url: security/elk-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/elk-domain-security.yml
   - type: Website
     url: https://elk.zone
   - type: GitHubOrganization
