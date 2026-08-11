@@ -49,6 +49,15 @@ apis:
       - type: Specification
         url: https://docs.joinmastodon.org/api/
 common:
+  - type: Releases
+    url: https://github.com/elk-zone/elk/releases
+  - type: CodeOfConduct
+    url: https://github.com/elk-zone/elk/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/elk-zone/elk/blob/main/CONTRIBUTING.md
+  - type: License
+    name: MIT
+    url: https://github.com/elk-zone/elk/blob/main/LICENSE
   - type: VulnerabilityDisclosure
     url: security/elk-vulnerability-disclosure.yml
   - type: DomainSecurity
