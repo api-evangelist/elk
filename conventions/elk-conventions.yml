@@ -1,0 +1,136 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Derived from Elk's published server handlers under server/api/ on
+  https://github.com/elk-zone/elk (main, read 2026-08-27), plus live response headers
+  observed on https://elk.zone/api/list-servers (HTTP 200, 2026-08-27). No conventions,
+  reference, or integration documentation is published on docs.elk.zone.
+provider: Elk
+providerId: elk
+api: Elk Client API
+baseURL: https://elk.zone/api
+scope_note: >-
+  This describes ELK'S OWN four-endpoint server surface, not the Mastodon API that Elk
+  consumes on the user's behalf. Elk's surface exists to serve the Elk web client: list
+  the sign-in instances, build an authorize URL, complete the OAuth callback, and let an
+  operator clear a cached app registration. It is not marketed, versioned, or documented
+  as a public API.
+auth_style:
+  summary: None on the public read endpoint; OAuth 2.0 brokering to the user's Mastodon server; a shared operator key on the clear endpoint.
+  see: authentication/elk-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key handling exists in any handler. GET /api/list-servers and
+    GET /api/{server}/clear are naturally idempotent; POST /api/{server}/login is safe to
+    repeat because it only builds a URL; the OAuth callback is NOT — an authorization code
+    is single-use and a replay fails with "Could not complete log in."
+  applicable: true
+pagination:
+  supported: false
+  evidence: >-
+    GET /api/list-servers returns the complete array in one response (2,319 bytes,
+    2026-08-27) with no limit, cursor, offset, or Link header.
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: false
+request_id_tracing:
+  supported: partial
+  headers:
+    - x-nf-request-id
+    - cf-ray
+    - etag
+  evidence: >-
+    Observed on the live 200 from /api/list-servers. These are Netlify and Cloudflare
+    infrastructure identifiers, not an application-level correlation ID Elk defines or
+    documents. An agent can quote x-nf-request-id in a support issue but Elk publishes no
+    contract around it.
+versioning:
+  api_versioning: none
+  evidence: >-
+    No version segment, header, or media-type parameter on any route. The paths are
+    /api/list-servers and /api/{server}/... with no /v1/. The application itself is
+    semver-tagged (v1.0.1) but that versions the client, not this surface.
+  see: lifecycle/elk-lifecycle.yml
+error_envelope:
+  consistent: false
+  format: nitro-h3
+  rfc9457: false
+  see: errors/elk-problem-types.yml
+  note: >-
+    Two different envelopes, and /clear reports authorization failure at HTTP 200. See
+    the error catalog.
+rate_limit_signaling:
+  headers_present: false
+  evidence: >-
+    The live 200 from /api/list-servers on 2026-08-27 carried no X-RateLimit-*,
+    RateLimit-*, or Retry-After header. Response headers observed were cache-control,
+    cache-status, etag, netlify-vary, nel, referrer-policy, x-content-type-options,
+    x-download-options, x-frame-options, x-permitted-cross-domain-policies,
+    x-xss-protection, cf-cache-status, cf-ray, alt-svc.
+  see: rate-limits/elk-rate-limits.yml
+caching:
+  supported: true
+  headers:
+    - 'cache-control: stale-while-revalidate'
+    - etag
+    - last-modified
+  evidence: Observed live on GET /api/list-servers, 2026-08-27.
+cors:
+  enabled: true
+  evidence: 'access-control-allow-origin: * observed on GET /api/list-servers, 2026-08-27.'
+dry_run_mode:
+  supported: false
+  applicable: true
+reversibility:
+  grade: documented
+  applicable: true
+  note: >-
+    GRADED HONESTLY AND CONSERVATIVELY. Elk publishes no reversibility documentation of
+    any kind, so nothing here reaches `verified`. The one reversal path below is
+    documented by the user-facing Mastodon ecosystem, not by Elk. NO WINDOW IS ASSERTED
+    ANYWHERE, because Elk states none — inventing one is the single most expensive error
+    available in this artifact.
+  write_surfaces:
+    - operation: POST /api/{server}/login
+      writes: >-
+        Nothing durable at Elk. It returns a URL. The durable effect happens only if the
+        user then completes authorization at their own Mastodon server.
+      reversal: >-
+        The user revokes Elk under their Mastodon instance's authorised-applications
+        settings. This is a Mastodon capability, not an Elk endpoint.
+      reversal_operation: null
+      window: null
+      window_source: null
+      grade: documented
+    - operation: GET /api/{server}/oauth/{origin}
+      writes: Exchanges a single-use authorization code for an access token and hands it to the browser.
+      reversal: >-
+        Revoke the token at the Mastodon server. Elk exposes no revoke or sign-out API
+        endpoint; sign-out is client-side state removal only.
+      reversal_operation: null
+      window: null
+      window_source: null
+      grade: documented
+    - operation: GET /api/{server}/clear
+      writes: Deletes the cached OAuth application registration for one server (deleteApp).
+      reversal: >-
+        NOT REVERSIBLE as an operation, but self-healing in effect — the next sign-in for
+        that server re-registers an application via getApp(). Operator-gated by adminKey.
+      reversal_operation: null
+      window: null
+      window_source: null
+      grade: documented
+cross_links:
+  errors: errors/elk-problem-types.yml
+  lifecycle: lifecycle/elk-lifecycle.yml
+  authentication: authentication/elk-authentication.yml
+  scopes: scopes/elk-scopes.yml
+  rate_limits: rate-limits/elk-rate-limits.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

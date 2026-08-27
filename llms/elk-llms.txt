@@ -1,0 +1,19 @@
+# Elk
+
+## Documentation Sets
+
+- [Elk](https://docs.elk.zone/llms-full.txt)
+
+## Landing
+
+- [Elk - A Nimble Mastodon Web Client](https://docs.elk.zone): A nimble Mastodon web client that provides a fresh and intuitive social media experience with modern features and elegant design.
+
+## Docs
+
+- [Introduction](https://docs.elk.zone/guide): Get started with Elk, the nimble Mastodon web client.
+- [Features](https://docs.elk.zone/guide/features): Discover the features that make Elk a delightful Mastodon client.
+- [Contributing](https://docs.elk.zone/guide/contributing): Learn how to contribute to Elk and help build the future of Mastodon clients.
+- [Sponsoring](https://docs.elk.zone/guide/sponsoring): Support the development of Elk by sponsoring the team.
+- [Netlify and Cloudflare](https://docs.elk.zone/deployment/netlify): Deploy your own Elk instance.
+- [Progressive Web App](https://docs.elk.zone/pwa): Learn about Elk's PWA capabilities and how to install it on your device.
+- [Privacy Policy](https://docs.elk.zone/privacy): Elk's privacy policy and data handling practices.

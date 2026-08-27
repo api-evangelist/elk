@@ -1,0 +1,42 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.elk.zone/llms.txt
+provider: Elk
+providerId: elk
+file: elk-llms.txt
+x-evidence:
+  fetched: '2026-08-27'
+  url: https://docs.elk.zone/llms.txt
+  http_status: 200
+  content_type: text/plain; charset=UTF-8
+  bytes: 1084
+note: >-
+  Provider-published llms.txt, saved verbatim. It indexes eight documentation pages
+  (guide, features, contributing, sponsoring, Netlify/Cloudflare deployment, PWA,
+  privacy) and a landing page. DEFECT WORTH REPORTING TO THE PROVIDER: the
+  "Documentation Sets" entry points at https://docs.elk.zone/llms-full.txt, which
+  returned HTTP 404 when probed on 2026-08-27 — the manifest advertises a full-text
+  bundle the docs host does not serve. Every other URL in the file resolved 200.
+  The file documents the Elk client application; it does not describe an API surface.
+linked_documents:
+  - url: https://docs.elk.zone/llms-full.txt
+    status: 404
+  - url: https://docs.elk.zone
+    status: 200
+  - url: https://docs.elk.zone/guide
+    status: 200
+  - url: https://docs.elk.zone/guide/features
+    status: 200
+  - url: https://docs.elk.zone/guide/sponsoring
+    status: 200
+  - url: https://docs.elk.zone/pwa
+    status: 200
+  - url: https://docs.elk.zone/privacy
+    status: 200
+  - url: https://docs.elk.zone/guide/contributing
+    status: 200
+  - url: https://docs.elk.zone/deployment/netlify
+    status: 200
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

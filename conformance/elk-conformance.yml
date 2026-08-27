@@ -1,0 +1,107 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Derived from Elk's published server handlers and app composables on
+  https://github.com/elk-zone/elk (main, read 2026-08-27), live response headers from
+  https://elk.zone/api/list-servers, and the Elk documentation at https://docs.elk.zone.
+  Cross-checked against https://docs.joinmastodon.org/api/ .
+provider: Elk
+providerId: elk
+api: Elk Client API
+standards:
+  - id: oauth2
+    name: OAuth 2.0 Authorization Code (RFC 6749)
+    conforms: true
+    role: client
+    evidence: >-
+      server/api/[server]/login.ts builds a response_type=code authorize URL with
+      client_id, redirect_uri and scope; server/api/[server]/oauth/[origin].ts POSTs
+      grant_type=authorization_code with client_id, client_secret, redirect_uri and code
+      to the instance token endpoint. Elk is a conforming OAuth CLIENT; it is not an
+      authorization server and publishes no authorization-server metadata.
+  - id: oauth2-pkce
+    name: PKCE (RFC 7636)
+    conforms: false
+    evidence: >-
+      No code_verifier or code_challenge appears in either handler. The flow relies on a
+      server-held client_secret instead — defensible for a confidential server-side
+      client, but PKCE is absent.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: /.well-known/openid-configuration returned 404 on elk.zone and docs.elk.zone (2026-08-27).
+  - id: rfc9457
+    name: Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Errors are Nitro/h3 JSON envelopes; no application/problem+json. See
+      errors/elk-problem-types.yml.
+  - id: idempotency
+    name: Idempotency keys
+    conforms: false
+    evidence: No Idempotency-Key handling in any handler.
+  - id: pagination
+    name: Pagination
+    conforms: false
+    evidence: GET /api/list-servers returns the full array with no cursor, limit or Link header.
+  - id: rate-limit-headers
+    name: RateLimit header fields for HTTP
+    conforms: false
+    evidence: >-
+      No RateLimit-* or X-RateLimit-* header on the live 200 from /api/list-servers
+      (2026-08-27).
+  - id: cors
+    name: CORS
+    conforms: true
+    evidence: 'access-control-allow-origin: * observed on GET /api/list-servers (2026-08-27).'
+  - id: web-push
+    name: Web Push (RFC 8030) / VAPID (RFC 8292)
+    conforms: true
+    role: client
+    evidence: >-
+      Elk requests the Mastodon `push` scope and carries the instance vapid_key through
+      the OAuth callback into the client (server/api/[server]/oauth/[origin].ts), and
+      registers push subscriptions in app/composables/push-notifications/. Documented for
+      end users at https://docs.elk.zone/pwa .
+  - id: pwa
+    name: W3C Web App Manifest / Service Worker
+    conforms: true
+    evidence: >-
+      Dedicated PWA module (modules/pwa/) and a service-worker/ directory; documented at
+      https://docs.elk.zone/pwa (HTTP 200, 2026-08-27).
+domain_standards:
+  - id: mastodon-client-api
+    name: Mastodon Client REST API
+    market: Fediverse / decentralised social networking
+    conforms: true
+    role: client
+    evidence: >-
+      THE DOMAIN-STANDARD SIGNATURE IS IN THE CONTRACT, NOT THE MARKETING. Elk's own
+      endpoints speak Mastodon's protocol shapes directly: /api/{server}/login constructs
+      https://{server}/oauth/authorize and /api/{server}/oauth/{origin} POSTs to
+      https://{server}/oauth/token, both with the Mastodon scope vocabulary
+      "read write follow push"; v0.17.0 adopted Mastodon's /api/v2/instance to fetch
+      vapid_key, with a documented v2-to-v1 fallback for older servers and GoToSocial
+      (AGENTS.md). The client layer is Masto.js. Elk therefore integrates with any
+      Mastodon-compatible instance with no bespoke connector — the exact property this
+      check exists to distinguish.
+    reference: https://docs.joinmastodon.org/api/
+  - id: activitypub
+    name: ActivityPub (W3C)
+    conforms: false
+    role: none
+    evidence: >-
+      NOT CLAIMED. Elk is a client of Mastodon's REST API; it does not implement
+      ActivityPub server-to-server federation, serve actor documents, or process
+      ActivityStreams. Recorded explicitly so a later pass does not infer ActivityPub
+      from the Fediverse tag.
+compliance:
+  certifications: []
+  trust_center: null
+  note: >-
+    No SOC 2, ISO 27001, or other certification is claimed, and no trust center exists.
+    No Compliance pointer is emitted. A privacy policy is published at
+    https://docs.elk.zone/privacy (HTTP 200, 2026-08-27).
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

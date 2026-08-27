@@ -1,37 +1,48 @@
 aid: elk
 name: Elk
 description: >-
-  Elk is a nimble Mastodon web client that provides a modern interface for
-  interacting with the Mastodon and Fediverse social network. It supports
-  standard Mastodon API endpoints for social networking, timelines, notifications,
-  and account management.
+  Elk is a nimble, MIT-licensed Mastodon web client maintained by Anthony Fu, Daniel Roe,
+  Kevin Deng and Patak. It runs as a Nuxt 4 progressive web app at elk.zone and connects
+  to any Mastodon-compatible instance the user chooses, speaking the Mastodon Client API
+  through Masto.js with WebSocket streaming and Web Push notifications. Elk sells no API
+  product and issues no credential of its own: its small server surface at elk.zone/api
+  exists to list sign-in instances and broker the OAuth 2.0 handshake with the user's own
+  server, and every timeline, post and notification call goes to that instance directly.
 type: Index
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: free
+  onboarding: self-service
   trial: false
-  try_now: false
-  public: false
-  label: Freemium
-  confidence: medium
+  try_now: true
+  public: true
+  label: Free / Open Source
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  generated: '2026-08-27'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/elk.png
 tags:
   - Fediverse
   - Mastodon
   - Open-Source
-  - Social Networking
+  - Social-Networking
+  - Social-Media
+  - Web-Client
+  - Progressive-Web-App
+  - OAuth
 tags_raw:
   - Fediverse
   - Mastodon
   - Open Source
   - Social Networking
+  - Social Media
+  - Web Client
+  - Progressive Web App
+  - OAuth
 url: https://elk.zone
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-08-27'
 position: Consumer
 access: 3rd-Party
 specificationVersion: '0.23'
@@ -39,9 +50,14 @@ apis:
   - aid: elk:elk-client-api
     name: Elk Client API
     description: >-
-      Client-side API for Elk, a nimble Mastodon web client providing access
-      to Fediverse social networking functionality.
+      Elk's own server surface, served by its Nuxt runtime at https://elk.zone/api. Four
+      endpoints: list the Mastodon-compatible instances offered in the sign-in picker,
+      build the instance authorize URL, complete the OAuth authorization-code callback,
+      and (operator-only) clear a cached OAuth app registration. It is not a marketed,
+      versioned or documented public API, and it is not the Mastodon API — timelines,
+      posts and notifications are served by the user's own instance, not by Elk.
     humanURL: https://elk.zone
+    baseURL: https://elk.zone/api
     tags:
       - Fediverse
       - Mastodon
@@ -51,8 +67,18 @@ apis:
         url: https://docs.elk.zone
       - type: SourceCode
         url: https://github.com/elk-zone/elk
-      - type: Specification
-        url: https://docs.joinmastodon.org/api/
+      - type: Authentication
+        url: authentication/elk-authentication.yml
+      - type: OAuthScopes
+        url: scopes/elk-scopes.yml
+      - type: ErrorCatalog
+        url: errors/elk-problem-types.yml
+      - type: Conventions
+        url: conventions/elk-conventions.yml
+      - type: RateLimits
+        url: rate-limits/elk-rate-limits.yml
+      - type: Conformance
+        url: conformance/elk-conformance.yml
 common:
   - type: Releases
     url: https://github.com/elk-zone/elk/releases
@@ -63,8 +89,6 @@ common:
   - type: License
     name: MIT
     url: https://github.com/elk-zone/elk/blob/main/LICENSE
-  - type: VulnerabilityDisclosure
-    url: security/elk-vulnerability-disclosure.yml
   - type: DomainSecurity
     url: security/elk-domain-security.yml
   - type: Website
@@ -73,6 +97,32 @@ common:
     url: https://github.com/elk-zone
   - type: Support
     url: https://github.com/elk-zone/elk/issues
+  - type: Documentation
+    url: https://docs.elk.zone
+  - type: GettingStarted
+    url: https://docs.elk.zone/guide
+  - type: PrivacyPolicy
+    url: https://docs.elk.zone/privacy
+  - type: ChangeLog
+    url: https://github.com/elk-zone/elk/releases
+  - type: ChangeLog
+    name: Structured changelog artifact
+    url: changelog/elk-changelog.yml
+  - type: LLMsTxt
+    url: llms/elk-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Packages
+    url: packages/elk-packages.yml
+  - type: Lifecycle
+    url: lifecycle/elk-lifecycle.yml
+  - type: Plans
+    url: plans/elk-plans-pricing.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-27'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v1

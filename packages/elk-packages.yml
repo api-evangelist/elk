@@ -1,0 +1,67 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  registry.npmjs.org, ghcr.io registry v2 API, github.com/elk-zone package.json,
+  docs.elk.zone/deployment/netlify
+provider: Elk
+providerId: elk
+note: >-
+  Elk publishes NO client SDK. It is a deployable web application, not a library, so
+  there is nothing here that a developer imports to call an API — which is why no
+  `SDKs` pointer is emitted in apis.yml. What Elk does distribute is the application
+  itself, as an OCI container image on GitHub Container Registry and as source for a
+  Netlify/Cloudflare self-deploy. The npm name `@elk-zone/elk` appears in package.json
+  but is NOT published to npm (registry.npmjs.org returned "Not found" on 2026-08-27);
+  the unscoped npm package `elk` is an unrelated 2015 project by a different author and
+  is not first-party.
+packages:
+  - name: elk-zone/elk
+    registry: ghcr
+    url: https://ghcr.io/elk-zone/elk
+    official: true
+    kind: container
+    language: n/a
+    version: 1.0.1
+    published: null
+    note: >-
+      Verified live on 2026-08-27: GET /v2/elk-zone/elk/tags/list returned 200 with 44
+      tags, newest v1.0.1 (multi-arch amd64 + arm64 OCI image index). published is null
+      because the ghcr registry v2 API exposes no creation timestamp and the image index
+      carries no org.opencontainers.image.created annotation; the matching source release
+      github.com/elk-zone/elk/releases/tag/v1.0.1 is dated 2026-07-30.
+  - name: '@elk-zone/elk'
+    registry: npm
+    url: null
+    official: true
+    kind: application
+    language: TypeScript
+    version: null
+    published: null
+    note: >-
+      Declared in github.com/elk-zone/elk package.json as version 1.0.1, but NOT
+      published — registry.npmjs.org/@elk-zone%2Felk returned "Not found" on 2026-08-27.
+      Recorded as a checked absence, not a guess: the name exists in source only.
+  - name: elk
+    registry: npm
+    url: https://www.npmjs.com/package/elk
+    official: false
+    kind: unrelated
+    version: 1.0.0
+    published: '2015-11-12'
+    note: >-
+      NOT Elk the Mastodon client. Namesake collision recorded so a later pass does not
+      re-discover it and mark it first-party. No repository field, no relation to
+      elk-zone, last published 2015-11-12.
+distribution:
+  - method: hosted
+    url: https://elk.zone
+    note: Official hosted deployment operated by the Elk team.
+  - method: self-host-container
+    url: https://ghcr.io/elk-zone/elk
+    note: Docker/OCI image; Dockerfile and docker-compose.yaml are in the source repo.
+  - method: self-host-source
+    url: https://docs.elk.zone/deployment/netlify
+    note: Documented one-click deploy to Netlify and Cloudflare.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,74 @@
+generated: '2026-08-27'
+method: searched
+source: https://github.com/elk-zone/elk/releases
+provider: Elk
+providerId: elk
+format: github-releases
+note: >-
+  Elk's dated changelog is its GitHub Releases feed — auto-generated, per-tag, with
+  Features / Bug Fixes sections and a compare link. There is no changelog page on
+  docs.elk.zone and no API changelog: every entry below describes the client
+  application, and none of the 44 releases records a change to the /api surface.
+scheme: semver
+current_version: 1.0.1
+feed: https://github.com/elk-zone/elk/releases.atom
+entries:
+  - version: v1.0.1
+    date: '2026-07-30'
+    url: https://github.com/elk-zone/elk/releases/tag/v1.0.1
+    breaking: false
+    highlights:
+      - 'Fix: sanitize scheduled status content'
+      - 'Fix: strip bidi control characters from URLs'
+      - 'Fix: iterate removeHTMLTags until stable'
+      - 'Fix: blocked user profile showed a "Blocked following" button'
+      - 'Feature: updated icons for adding/removing accounts to lists'
+      - 'Feature: PWA mobile screenshots with form_factor'
+      - 'i18n: Hebrew (he) translation added; id-ID updated'
+  - version: v1.0.0
+    date: '2026-06-05'
+    url: https://github.com/elk-zone/elk/releases/tag/v1.0.0
+    breaking: false
+    highlights:
+      - 'Feature: scheduled posts, including a delete button and a publish-widget entry point'
+      - 'Feature: quote posts'
+      - 'Feature: partial read-only support for Fedibird emoji reactions'
+      - 'Feature: extra confirmation step on "block domain"'
+      - 'Feature: well-being option to disable timeline autoloading'
+      - 'Feature: relationship badge on the follow button'
+  - version: v0.17.3
+    date: '2025-12-03'
+    url: https://github.com/elk-zone/elk/releases/tag/v0.17.3
+    breaking: false
+    highlights:
+      - 'Feature: display quote notifications'
+      - 'Feature: check user session before subscribing to streaming'
+      - 'Fix: paginator values being cloned'
+  - version: v0.17.2
+    date: '2025-11-22'
+    url: https://github.com/elk-zone/elk/releases/tag/v0.17.2
+    breaking: false
+    highlights:
+      - 'Fix: reverted "New toots doesn''t load anymore"'
+  - version: v0.17.1
+    date: '2025-11-22'
+    url: https://github.com/elk-zone/elk/releases/tag/v0.17.1
+    breaking: false
+    highlights:
+      - 'Fix: new toots did not load'
+  - version: v0.17.0
+    date: '2025-11-21'
+    url: https://github.com/elk-zone/elk/releases/tag/v0.17.0
+    breaking: false
+    highlights:
+      - 'Feature: poll updates'
+      - 'Feature: adopt /api/v2/instance to fetch the app vapid_key'
+      - 'Feature: support for the browser Translation API'
+      - 'Feature: followed-hashtag badge; server info in the aside when signed out'
+      - >-
+        Infra: release notes announced code.elk.zone redirecting to the GitHub
+        repository. Recorded as published, not as current — the host did not resolve
+        when probed on 2026-08-27 (curl exit: no DNS/connection).
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

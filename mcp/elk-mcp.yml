@@ -1,0 +1,56 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Search for a first-party MCP server (web search, github.com/elk-zone org listing —
+  three repos: elk, elk-native, .github — and a probe of https://docs.elk.zone/mcp,
+  HTTP 404, 2026-08-27) found none. Candidate tools below are derived from Elk's
+  published server handlers under server/api/ .
+provider: Elk
+providerId: elk
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+note: >-
+  ELK SHIPS NO MCP SERVER, hosted or stdio, and no `MCPServer` pointer is wired in
+  apis.yml — this file records a derived candidate only. Beware a namesake: searching
+  "ELK MCP server" surfaces Elasticsearch/Logstash/Kibana MCP servers, which are an
+  unrelated product from a different company.
+  A candidate here would also be of limited value: the useful agent surface for a
+  Fediverse account is the MASTODON API of the user's own instance, which Elk brokers
+  access to but does not own. An Elk MCP server would mostly wrap someone else's API.
+candidate_tools:
+  - name: list_servers
+    rest: GET /api/list-servers
+    description: List the Mastodon-compatible server domains Elk offers in its sign-in picker.
+    auth: none
+    confidence: high
+    note: Verified live 2026-08-27 (HTTP 200, application/json, CORS open).
+  - name: build_login_url
+    rest: POST /api/{server}/login
+    description: >-
+      Build the Mastodon authorize URL for a given server and origin, requesting the
+      read/write/follow/push scopes.
+    auth: none
+    confidence: high
+  - name: complete_oauth_callback
+    rest: GET /api/{server}/oauth/{origin}
+    description: Exchange an authorization code for an access token at the user's instance.
+    auth: oauth
+    confidence: low
+    note: >-
+      Not a sensible agent tool — it is a browser redirect leg that terminates in a 302
+      and hands a bearer token to the front end. Listed for completeness only.
+  - name: clear_app_registration
+    rest: GET /api/{server}/clear
+    description: Delete the cached OAuth application registration for one server.
+    auth: api-key
+    confidence: low
+    note: Operator-only; gated by a deployment secret that is not issued to consumers.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

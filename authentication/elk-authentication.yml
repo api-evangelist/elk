@@ -1,0 +1,87 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Derived from Elk's own published MIT-licensed server source —
+  https://github.com/elk-zone/elk/blob/main/server/api/[server]/login.ts and
+  https://github.com/elk-zone/elk/blob/main/server/api/[server]/oauth/[origin].ts —
+  plus a live unauthenticated probe of https://elk.zone/api/list-servers on 2026-08-27.
+  Elk publishes no OpenAPI, so derive-authentication.py produced no profile (0 auth
+  profiles); this file was written by reading the deployed handlers instead.
+provider: Elk
+providerId: elk
+api: Elk Client API
+baseURL: https://elk.zone/api
+summary: >-
+  Elk has no API keys, no accounts of its own, and no credential it issues. It is an
+  OAuth 2.0 CLIENT and a broker: it holds a per-instance OAuth application registration
+  for each Mastodon server a user signs into, sends the user to that server's own
+  /oauth/authorize screen, and exchanges the returned authorization code for an access
+  token at that server's /oauth/token. The bearer token that results belongs to the
+  Mastodon server, not to Elk. Nothing an integrator can obtain from Elk grants access
+  to anything.
+securitySchemes:
+  - name: none
+    type: none
+    applies_to:
+      - GET /api/list-servers
+    description: >-
+      Unauthenticated. Verified live 2026-08-27: HTTP 200, application/json, with
+      access-control-allow-origin "*" — a public, CORS-open list of the Mastodon server
+      domains Elk offers in its sign-in picker.
+  - name: mastodon_oauth2
+    type: oauth2
+    flow: authorizationCode
+    authorizationUrl: https://{server}/oauth/authorize
+    tokenUrl: https://{server}/oauth/token
+    grant_type: authorization_code
+    response_type: code
+    scopes:
+      - read
+      - write
+      - follow
+      - push
+    applies_to:
+      - POST /api/{server}/login
+      - GET /api/{server}/oauth/{origin}
+    description: >-
+      Standard RFC 6749 authorization-code flow, but the authorization server is chosen
+      at runtime by the end user — {server} is whatever Mastodon-compatible host they
+      typed. Elk registers an OAuth application per (origin, server) pair and caches
+      client_id/client_secret/vapid_key server-side; the client_secret never reaches the
+      browser. On success the handler 302-redirects to /signin/callback carrying the
+      access token in the query string.
+    x-notes:
+      - >-
+        Client credentials are per-deployment. A self-hosted Elk registers its own
+        applications against each Mastodon server; there is no shared Elk client_id.
+      - >-
+        The handler recovers from an invalid_client error (the Mastodon-side OAuth app
+        having been deleted) by invalidating its cached registration and retrying once.
+  - name: admin_key
+    type: apiKey
+    in: query
+    parameter: key
+    applies_to:
+      - GET /api/{server}/clear
+    description: >-
+      A single shared operator secret (Nuxt runtimeConfig.adminKey) that authorises
+      deletion of a cached OAuth app registration. It is an operations control for
+      whoever runs the deployment, not a consumer credential — it is not issued, not
+      documented, and not obtainable. Compared with String equality; a wrong or missing
+      key returns HTTP 200 with {"status": false, "error": "incorrect key"} rather than
+      a 401/403.
+token_handling:
+  storage: >-
+    Access tokens are held client-side in browser storage by the Elk application (see
+    app/composables/users.ts). Elk operates no user database.
+  transport: Query string on the /signin/callback redirect, then Authorization bearer to the Mastodon server.
+  revocation: >-
+    At the Mastodon server, not at Elk. A user revokes Elk under their own instance's
+    authorised-applications settings.
+gaps:
+  - No published authentication documentation on docs.elk.zone; this profile is derived from source.
+  - No OpenAPI securitySchemes block exists to derive from.
+  - No /.well-known/oauth-authorization-server or oauth-protected-resource on elk.zone (both 404, 2026-08-27).
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

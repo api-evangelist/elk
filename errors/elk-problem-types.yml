@@ -1,0 +1,74 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Derived from createError() calls and returned error envelopes in Elk's published
+  server handlers: server/api/[server]/login.ts, server/api/[server]/oauth/[origin].ts
+  and server/api/[server]/clear.ts on https://github.com/elk-zone/elk (main, read
+  2026-08-27). No error reference page exists on docs.elk.zone to enrich from.
+provider: Elk
+providerId: elk
+api: Elk Client API
+baseURL: https://elk.zone/api
+format: nitro-h3
+rfc9457: false
+content_type: application/json
+envelope: >-
+  Two envelopes, inconsistently. Nuxt/Nitro createError() produces
+  {"statusCode": n, "statusMessage": "...", "url": "...", "error": true} at the real HTTP
+  status. The /clear handler instead returns HTTP 200 with {"status": false, "error":
+  "..."} — a failure that an agent checking status codes alone would read as success.
+  Neither is application/problem+json.
+problem_types:
+  - status: 400
+    message: Missing server parameter.
+    operation: POST /api/{server}/login
+    remediation: Supply the Mastodon server domain as the path segment.
+  - status: 400
+    message: 'App not registered for server: {server}'
+    operation: POST /api/{server}/login
+    remediation: >-
+      The deployment could not obtain or reuse an OAuth application registration on that
+      Mastodon server. Confirm the host is a reachable Mastodon-compatible instance.
+  - status: 400
+    message: Missing server or origin parameter.
+    operation: GET /api/{server}/oauth/{origin}
+    remediation: Both path segments are required; origin is URI-encoded.
+  - status: 400
+    message: 'App not registered for server: {server}'
+    operation: GET /api/{server}/oauth/{origin}
+    remediation: Restart sign-in so the application registration is re-created.
+  - status: 422
+    message: Missing authentication code.
+    operation: GET /api/{server}/oauth/{origin}
+    remediation: The OAuth redirect must carry ?code=. Restart the authorization flow.
+  - status: 400
+    message: Could not complete log in.
+    operation: GET /api/{server}/oauth/{origin}
+    remediation: >-
+      Catch-all for a failed token exchange — network error, expired or reused code, or
+      an instance-side rejection. The upstream cause is not surfaced to the caller.
+  - status: 400
+    message: 'OAuth application recovery failed. Please try again.'
+    operation: GET /api/{server}/oauth/{origin}
+    remediation: >-
+      Raised only after Elk detected invalid_client, invalidated its cached registration,
+      re-registered, and the retried token exchange still failed.
+  - status: 200
+    message: '{"status": false, "error": "missing server"}'
+    operation: GET /api/{server}/clear
+    remediation: Supply the server path segment. NOTE the 200 status on a failure.
+  - status: 200
+    message: '{"status": false, "error": "incorrect key"}'
+    operation: GET /api/{server}/clear
+    remediation: >-
+      Operator-only. Supply the deployment's adminKey as ?key=. NOTE the 200 status on an
+      authorization failure — this is not a 401 or 403.
+gaps:
+  - No machine-readable error taxonomy, error codes, or problem-type URIs are published.
+  - No RFC 9457 application/problem+json anywhere on the surface.
+  - >-
+    Error strings are English prose, not stable identifiers, so an agent cannot branch on
+    them safely.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -4,88 +4,70 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Elk
 providerId: elk
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - Fediverse
-  - Mastodon
-  - Open Source
-  - Social Networking
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Elk API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+modified: '2026-08-27'
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live unauthenticated GET https://elk.zone/api/list-servers (HTTP 200, 2026-08-27,
+  full response headers captured) plus a documentation search across
+  https://docs.elk.zone and https://github.com/elk-zone/elk for published limits.
+limit_count: 0
+note: >-
+  CORRECTION, 2026-08-27. This file previously carried five fabricated limits — 10
+  req/min and 1,000 req/month "free", 100 req/min and 100,000 req/month "professional",
+  1,000 req/min "enterprise", all keyed to an api-key scope Elk does not issue — written
+  by the 2026-05-04 bulk scaffold sweep. None of them exist. They were replaced with this
+  measured zero.
+  Elk publishes no rate limits and returns no rate-limit headers. THIS IS AN HONEST ZERO,
+  NOT AN UNCHECKED ONE: a live 200 was captured and its headers read. The limits that
+  actually govern an Elk session are enforced by the user's own Mastodon instance against
+  their own token, not by Elk.
+limits: []
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+observed_headers:
+  url: https://elk.zone/api/list-servers
+  status: 200
+  observed: '2026-08-27'
+  rate_limit_headers_present: false
+  headers_seen:
+    - cache-control
+    - cache-status
+    - etag
+    - last-modified
+    - netlify-vary
+    - nel
+    - referrer-policy
+    - x-content-type-options
+    - x-download-options
+    - x-frame-options
+    - x-permitted-cross-domain-policies
+    - x-xss-protection
+    - cf-cache-status
+    - cf-ray
+    - alt-svc
+    - access-control-allow-origin
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
-limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Elk Client API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Elk Client API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Elk Client API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Elk Client API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Elk Client API
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  throttled: null
+  quotaExceeded: null
+policies: []
+upstream_limits:
+  - name: Mastodon instance rate limits
+    enforced_by: the user's chosen Mastodon-compatible server, not Elk
+    reference: https://docs.joinmastodon.org/api/rate-limits/
+    note: >-
+      Every Elk feature beyond the sign-in picker is a call to the user's instance,
+      carrying that instance's own limits and its own X-RateLimit-* headers. They vary
+      per instance and are outside Elk's control.
+edge:
+  provider: Netlify (origin) behind Cloudflare
+  note: >-
+    Infrastructure-level abuse protection may exist at the edge, but no limit, window, or
+    header is published or observable, so none is recorded.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

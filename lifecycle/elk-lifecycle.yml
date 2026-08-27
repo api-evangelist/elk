@@ -1,0 +1,52 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://github.com/elk-zone/elk/releases (44 tags, read via the GitHub releases API
+  2026-08-27), https://github.com/elk-zone/elk/blob/main/package.json, and probes of
+  elk.zone / docs.elk.zone for a status, SLA or deprecation page.
+provider: Elk
+providerId: elk
+versioning:
+  scheme: semver
+  current_version: 1.0.1
+  released: '2026-07-30'
+  applies_to: the Elk application
+  api_versioning: none
+  note: >-
+    The version describes the client application, NOT the /api surface, which carries no
+    version segment at all. A consumer of https://elk.zone/api has no way to pin or
+    detect a version.
+release_cadence:
+  observed: irregular
+  evidence: >-
+    v1.0.1 2026-07-30, v1.0.0 2026-06-05, v0.17.3 2025-12-03, v0.17.2 2025-11-22,
+    v0.17.1 2025-11-22, v0.17.0 2025-11-21, v0.16.0 2025-01-27, v0.15.1 2024-09-26.
+    A ten-month gap sits between v0.16.0 and v0.17.0; the repository itself stayed active
+    (last push 2026-08-18).
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  evidence: >-
+    No deprecation or sunset policy is published on docs.elk.zone or in the repository,
+    and no OpenAPI exists in which operations could be marked deprecated.
+status_page:
+  published: false
+  url: null
+  evidence: >-
+    No status.elk.zone and no status link on elk.zone or docs.elk.zone. The hosted
+    deployment runs on Netlify behind Cloudflare; there is no Elk-operated status surface
+    and therefore no StatusPage pointer is emitted.
+sla:
+  published: false
+  note: >-
+    Free, MIT-licensed, volunteer-maintained software with a free public deployment. No
+    availability commitment is offered or implied.
+support:
+  channel: GitHub Issues
+  url: https://github.com/elk-zone/elk/issues
+deprecated_operations: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

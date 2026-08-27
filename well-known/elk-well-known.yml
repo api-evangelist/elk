@@ -1,0 +1,65 @@
+generated: '2026-08-27'
+method: probed
+source: live GET probes of every host named in apis.yml (elk.zone) and the docs host (docs.elk.zone)
+provider: Elk
+providerId: elk
+note: >-
+  No /.well-known/ document is served on either host. elk.zone is a Nuxt SPA whose
+  catch-all answers 200 with the same ~22.6KB application shell for ANY unknown path
+  (verified: /zzz-nonexistent-abc returns a byte-identical shell), so a 200 on this host
+  is not evidence of a document. The /.well-known/* paths below are the exception — Nitro
+  returns a real 404 for them, and for three of them a genuine JSON 404 envelope. No
+  WellKnown or SecurityTxt pointer is emitted because nothing returned a real document.
+hosts:
+  - host: elk.zone
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: docs.elk.zone
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
