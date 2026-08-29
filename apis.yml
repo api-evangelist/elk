@@ -9,6 +9,19 @@ description: >-
   exists to list sign-in instances and broker the OAuth 2.0 handshake with the user's own
   server, and every timeline, post and notification call goes to that instance directly.
 type: Index
+deliveryModel:
+  model: open-core
+  license: MIT
+  open_source: true
+  commercial: true
+  callable_host: false
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-service
