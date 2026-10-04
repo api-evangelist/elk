@@ -38,9 +38,9 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/elk.png
 tags:
   - Fediverse
   - Mastodon
-  - Open-Source
-  - Social Networking
-  - Social-Media
+  - Open Source
+  - Social Network
+  - Social Media
   - Web-Client
   - Progressive Web App
   - Authentication
@@ -53,6 +53,8 @@ tags_raw:
   - Web Client
   - Progressive Web App
   - OAuth
+  - Open-Source
+  - Social-Media
 url: https://elk.zone
 created: '2024-01-01'
 modified: '2026-08-27'
