@@ -57,7 +57,7 @@ tags_raw:
   - Social-Media
 url: https://elk.zone
 created: '2024-01-01'
-modified: '2026-08-27'
+modified: '2026-10-06'
 position: Consuming
 access: 3rd-Party
 specificationVersion: '0.23'
@@ -95,6 +95,8 @@ apis:
       - type: Conformance
         url: conformance/elk-conformance.yml
 common:
+  - url: https://elk.zone/blog/
+    type: Blog
   - type: Releases
     url: https://github.com/elk-zone/elk/releases
   - type: CodeOfConduct
