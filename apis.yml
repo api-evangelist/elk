@@ -95,6 +95,10 @@ apis:
       - type: Conformance
         url: conformance/elk-conformance.yml
 common:
+  - type: RateLimits
+    url: rate-limits/elk-rate-limits.yml
+  - type: FinOps
+    url: finops/elk-finops.yml
   - url: https://elk.zone/blog/
     type: Blog
   - type: Releases
