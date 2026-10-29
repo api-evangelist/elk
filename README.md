@@ -1,4 +1,4 @@
-# Elk (elk)
+# Elk
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,42 +64,122 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Elk is a nimble Mastodon web client that provides a modern interface for interacting with the Mastodon and Fediverse social network. It supports standard Mastodon API endpoints for social networking, timelines, notifications, and account management.
+Elk is a nimble, MIT-licensed Mastodon web client maintained by Anthony Fu, Daniel Roe, Kevin Deng and Patak. It runs as a Nuxt 4 progressive web app at elk.zone and connects to any Mastodon-compatible instance the user chooses, speaking the Mastodon Client API through Masto.js with WebSocket streaming and Web Push notifications. Elk sells no API product and issues no credential of its own: its small server surface at elk.zone/api exists to list sign-in instances and broker the OAuth 2.0 handshake with the user's own server, and every timeline, post and notification call goes to that instance directly.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/elk/refs/heads/main/apis.yml)
+**Areas:** Fediverse · Mastodon · Open Source · Social Network · Social Media · Web-Client · Progressive Web App · Authentication
 
-## Scope
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+## Elk on APIs.io
 
-## Tags:
- - Fediverse, Mastodon, Open Source, Social Networking
+Everything profiled for Elk is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/elk/](https://apis.io/providers/elk/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
-- **Created:** 2024-01-01
-- **Modified:** 2026-03-16
+### APIs (1)
 
-## APIs
+- [Elk Client API](https://apis.io/apis/elk/elk-client-api/) — Elk's own server surface, served by its Nuxt runtime at https://elk.zone/api. Four endpoints: list the Mastodon-compatible instances offered in the sign-in…
 
-### Elk Client API
-Client-side API for Elk, a nimble Mastodon web client providing access to Fediverse social networking functionality.
+### Published properties
 
-**Human URL:** [https://elk.zone](https://elk.zone)
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-#### Tags:
- - Fediverse, Mastodon, Social
+#### MCP servers (1)
 
-#### Properties
-- [Documentation](https://docs.elk.zone)
-- [Source Code](https://github.com/elk-zone/elk)
-- [Specification](https://docs.joinmastodon.org/api/)
+Model Context Protocol servers that expose the API to agents.
 
-## Common Properties
+- [elk-mcp.yml](https://apis.io/servers/elk/elk-mcp-yml/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Elk Authentication](https://apis.io/security/elk/elk-authentication/)
+- [Elk Domain Security](https://apis.io/security/elk/elk-domain-security/)
+- [Elk Vulnerability Disclosure](https://apis.io/security/elk/elk-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Elk Scopes](https://apis.io/scopes/elk/elk-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Elk Plans Pricing](https://apis.io/plans/elk/elk-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Elk Rate Limits](https://apis.io/rate-limits/elk/elk-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Elk Finops](https://apis.io/finops/elk/elk-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://elk.zone)
-- [GitHub Organization](https://github.com/elk-zone)
+- [Documentation](https://docs.elk.zone)
+- [Getting started](https://docs.elk.zone/guide)
 - [Support](https://github.com/elk-zone/elk/issues)
+- [Changelog](https://github.com/elk-zone/elk/releases)
+- [Blog](https://elk.zone/blog/)
+- [Privacy policy](https://docs.elk.zone/privacy)
+- [GitHub](https://github.com/elk-zone)
 
-## Maintainers
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+## API Evangelist rating
+
+**Kin Score 29.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.4 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 10.5 |
+
+**Agent readiness 9.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/elk/](https://apis.io/providers/elk/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Elk: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/elk/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
