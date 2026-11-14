@@ -141,6 +141,8 @@ common:
     url: lifecycle/elk-lifecycle.yml
   - type: Plans
     url: plans/elk-plans-pricing.yml
+  - type: DataProcessing
+    url: privacy/elk-privacy-policy.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
